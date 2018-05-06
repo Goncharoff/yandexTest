@@ -23,6 +23,9 @@ public class PicturesListAdapter extends RecyclerView.Adapter<PicturesListAdapte
     private Context context;
     private ArrayList<String> imagesUrlList;
 
+    private static final int RESIZING_VALUE = 520;
+    public  static final String KEY_FOR_IMAGE_POSITION_IN_BUNDLE=  "imagePosition";
+    public  static final String KEY_FOR_ARRAY_OF_IMAGES_URL_IN_BUNDLE= "ImageUrls";
 
     public PicturesListAdapter(Context context, ArrayList<String> imagesUrlList) {
         this.imagesUrlList = imagesUrlList;
@@ -39,16 +42,10 @@ public class PicturesListAdapter extends RecyclerView.Adapter<PicturesListAdapte
             imageLoadingProgressBar = itemView.findViewById(R.id.imageLoadingProgressBar);
             imageLoadingProgressBar.setVisibility(View.VISIBLE);
 
-            itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(context, FullImageScreenActivity.class);
-                intent.putExtra("imagePosition", getAdapterPosition());
-                intent.putStringArrayListExtra("ImageUrls", imagesUrlList);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            });
+            itemView.setOnClickListener(v -> onItemViewClicked(v, getAdapterPosition()));
+
         }
     }
-
 
     @Override
     @NonNull
@@ -59,7 +56,13 @@ public class PicturesListAdapter extends RecyclerView.Adapter<PicturesListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull PicturesListAdapter.ViewHolder holder, int position) {
-        Picasso.get().load(imagesUrlList.get(position)).centerCrop().resize(520, 520).centerCrop().into(holder.imageView, new Callback() {
+
+        /**
+         * loading images from disk, using picasso lib and resizing it on constant value
+         * callback for showing progressbar while loading picture
+         */
+
+        Picasso.get().load(imagesUrlList.get(position)).centerCrop().resize(RESIZING_VALUE, RESIZING_VALUE).centerCrop().into(holder.imageView, new Callback() {
             @Override
             public void onSuccess() {
                 if (holder.imageLoadingProgressBar != null) {
@@ -69,7 +72,7 @@ public class PicturesListAdapter extends RecyclerView.Adapter<PicturesListAdapte
 
             @Override
             public void onError(Exception e) {
-                Toast.makeText(context, "Error while loading picture", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.error_during_loading_picture, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -80,8 +83,23 @@ public class PicturesListAdapter extends RecyclerView.Adapter<PicturesListAdapte
         notifyDataSetChanged();
     }
 
+
     @Override
     public int getItemCount() {
         return imagesUrlList.size();
+    }
+
+    /**
+     * Handles sign in button click
+     *
+     * @param itemView        - clicked image in recycler view
+     * @param adapterPosition - position image in adapter
+     */
+    private void onItemViewClicked(View itemView, int adapterPosition) {
+        Intent intent = new Intent(context, FullImageScreenActivity.class);
+        intent.putExtra(KEY_FOR_IMAGE_POSITION_IN_BUNDLE, adapterPosition);
+        intent.putStringArrayListExtra(KEY_FOR_ARRAY_OF_IMAGES_URL_IN_BUNDLE, imagesUrlList);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 }

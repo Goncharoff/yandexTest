@@ -61,7 +61,7 @@ public class RetrofitInteracted implements GetMetaDataContract.RetrofitInteracte
         });
     }
 
-    public void setImageUrlsDataFromServer() {
+    private void setImageUrlsDataFromServer() {
         for (int i = 0; i < itemsList.size(); i++) {
             imagesURLList.add(itemsList.get(i).getFile());
         }

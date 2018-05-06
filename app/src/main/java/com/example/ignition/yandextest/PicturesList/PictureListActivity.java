@@ -11,7 +11,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.ignition.yandextest.Adapter.PicturesListAdapter;
-import com.example.ignition.yandextest.Models.DiskMetaDataModel;
 import com.example.ignition.yandextest.R;
 
 import java.util.ArrayList;

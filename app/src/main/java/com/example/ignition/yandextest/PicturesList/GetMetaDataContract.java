@@ -2,7 +2,6 @@ package com.example.ignition.yandextest.PicturesList;
 
 import android.content.Context;
 
-import com.example.ignition.yandextest.Models.DiskMetaDataModel;
 
 import java.util.ArrayList;
 

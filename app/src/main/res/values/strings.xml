@@ -12,4 +12,5 @@
     <string name="image_menu_description">Menu button</string>
     <string name="counter_tv">%1$d/%2$d</string>
     <string name="image_info_eng">Image information</string>
+    <string name="error_during_loading_picture">Error while loading picture</string>
 </resources>
