@@ -1,4 +1,4 @@
-package com.example.ignition.yandextest.PicturesList;
+package com.example.ignition.yandextest.ImageInfoActivity;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -19,13 +19,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitInteracted implements GetMetaDataContract.RetrofitInteracted {
-    private GetMetaDataContract.OnGetDataListener mOnGetDataListener;
+public class RetrofitImageInfoModel implements GetImageInfoContract.RetrofitInteracted {
+    private GetImageInfoContract.OnGetDataListener mOnGetDataListener;
 
-    private List<Item> itemsList;
-    private ArrayList<String> imagesURLList = new ArrayList<>();
+    private List<Item> imageInfoData = new ArrayList<>();
 
-    RetrofitInteracted(GetMetaDataContract.OnGetDataListener mOnGetDataListener) {
+
+    RetrofitImageInfoModel(GetImageInfoContract.OnGetDataListener mOnGetDataListener) {
         this.mOnGetDataListener = mOnGetDataListener;
     }
 
@@ -46,11 +46,12 @@ public class RetrofitInteracted implements GetMetaDataContract.RetrofitInteracte
             @Override
             public void onResponse(@NonNull Call<DiskMetaDataModel> call, @NonNull Response<DiskMetaDataModel> response) {
                 DiskMetaDataModel diskMetaDataModel = response.body();
-                itemsList = diskMetaDataModel.getEmbedded().getItems();
-                setImageUrlsDataFromServer();
+                imageInfoData = diskMetaDataModel.getEmbedded().getItems();
+
                 Log.d("Data", "Refreshed");
 
-                mOnGetDataListener.onGetUrlSuccess("List siz: " + imagesURLList.size(), imagesURLList);
+                mOnGetDataListener.onGetUrlSuccessImageInfo("Success", imageInfoData);
+
             }
 
             @Override
@@ -59,11 +60,5 @@ public class RetrofitInteracted implements GetMetaDataContract.RetrofitInteracte
                 mOnGetDataListener.onFailure(t.getMessage());
             }
         });
-    }
-
-    public void setImageUrlsDataFromServer() {
-        for (int i = 0; i < itemsList.size(); i++) {
-            imagesURLList.add(itemsList.get(i).getFile());
-        }
     }
 }

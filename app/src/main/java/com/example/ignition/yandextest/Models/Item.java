@@ -27,6 +27,9 @@ public class Item {
     @Expose
     private String mimeType;
     @SerializedName("size")
+    //@Expose
+    //private String created;
+    //@SerializedName("modified")
     @Expose
     private Integer size;
     @SerializedName("preview")
@@ -117,4 +120,6 @@ public class Item {
     public void setFile(String file) {
         this.file = file;
     }
+
+
 }

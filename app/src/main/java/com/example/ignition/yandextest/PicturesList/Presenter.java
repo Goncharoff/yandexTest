@@ -4,9 +4,9 @@ import android.content.Context;
 
 import com.example.ignition.yandextest.Models.DiskMetaDataModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class Presenter implements GetMetaDataContract.Presenter, GetMetaDataContract.onGetDataListener {
+public class Presenter implements GetMetaDataContract.Presenter, GetMetaDataContract.OnGetDataListener, GetMetaDataContract.View {
     private GetMetaDataContract.View mGetDataView;
     private RetrofitInteracted mRetrofitInteracted;
 
@@ -16,13 +16,13 @@ public class Presenter implements GetMetaDataContract.Presenter, GetMetaDataCont
     }
 
     @Override
-    public void onSuccess(String message, DiskMetaDataModel diskMetaDataModel) {
-        mGetDataView.onGetDataSuccess(message, diskMetaDataModel);
+    public void onGetUrlSuccess(String message, ArrayList<String> imagesUrlList) {
+        mGetDataView.onGetUrlSuccess(message, imagesUrlList);
     }
 
     @Override
-    public void onGetUrlSuccess(String message, List<String> imagesUrlList) {
-        mGetDataView.onGetUrlSuccess(message, imagesUrlList);
+    public void onGetDataFailure(String message) {
+        mGetDataView.onGetDataFailure(message);
     }
 
     @Override
@@ -34,4 +34,5 @@ public class Presenter implements GetMetaDataContract.Presenter, GetMetaDataCont
     public void getDataFromURL(Context context, String url) {
         mRetrofitInteracted.initRetrofitCall(context, url);
     }
+
 }

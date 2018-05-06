@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <group android:id="@+id/menugroup1" >
+        <item
+            android:id="@+id/imageInfo"
+            android:title="Image info"/>
+        <item
+            android:id="@+id/turnLeft"
+            android:title="Turn left"/>
+        <item
+            android:id="@+id/turnRight"
+            android:title="Turn right">
+        </item>
+    </group>
+
+
+</menu>

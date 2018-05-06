@@ -19,8 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PicturesList.PictureListActivity" />
-        <activity android:name=".FullImageSizeScreen.FullImageScreenActivity"></activity>
+        <activity
+            android:name=".PicturesList.PictureListActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/picture_list_eng"/>
+        <activity android:name=".FullImageSizeScreen.FullImageScreenActivity" />
+        <activity android:name=".ImageInfoActivity.ImageInfoActivity"
+            android:label="@string/image_info_eng"></activity>
     </application>
 
 </manifest>

@@ -4,16 +4,15 @@ import android.content.Context;
 
 import com.example.ignition.yandextest.Models.DiskMetaDataModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface GetMetaDataContract {
-    interface onGetDataListener {
-        void onSuccess(String message, DiskMetaDataModel diskMetaDataModel);
-
-        void onGetUrlSuccess(String message, List<String> imagesUrlList);
+    interface OnGetDataListener {
+        void onGetUrlSuccess(String message, ArrayList<String> imagesUrlList);
 
         void onFailure(String message);
     }
+
 
     interface RetrofitInteracted {
         void initRetrofitCall(Context context, String url);
@@ -24,10 +23,9 @@ public interface GetMetaDataContract {
     }
 
     interface View {
-        void onGetDataSuccess(String message, DiskMetaDataModel diskMetaDataModel);
-
-        void onGetUrlSuccess(String message, List<String> imagesUrlList);
+        void onGetUrlSuccess(String message, ArrayList<String> imagesUrlList);
 
         void onGetDataFailure(String message);
     }
+
 }

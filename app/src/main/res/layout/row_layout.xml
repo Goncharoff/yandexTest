@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     card_view:cardPreventCornerOverlap="false">
+
     <RelativeLayout
         android:id="@+id/rellayout"
         android:layout_width="match_parent"
@@ -19,6 +20,13 @@
             android:cropToPadding="true"
             android:padding="1dp"
             android:scaleType="centerCrop" />
+
+        <ProgressBar
+            android:id="@+id/imageLoadingProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
